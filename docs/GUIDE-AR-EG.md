@@ -242,8 +242,8 @@ graph LR
 ├────────────────┬────────────┬──────────┬──────────────────┤
 │ الجهاز          │ السعر      │ CSI كامل │ الوظيفة           │
 ├────────────────┼────────────┼──────────┼──────────────────┤
-│ ESP32-S3 (8MB) │ ~$9 (~280ج)│ ✅ أيوه  │ سنسور WiFi CSI    │
-│ ESP32-S3 Mini  │ ~$6 (~190ج)│ ✅ أيوه  │ سنسور صغير        │
+│ ESP32-S3 (8MB) │ ~$9        │ ✅ أيوه  │ سنسور WiFi CSI    │
+│ ESP32-S3 Mini  │ ~$6        │ ✅ أيوه  │ سنسور صغير        │
 │ أي لابتوب      │ $0         │ ❌ لأ    │ RSSI بس (بسيط)    │
 │ Intel 5300 NIC │ ~$50       │ ✅ أيوه  │ Research grade     │
 │ أي راوتر WiFi  │ عندك أصلاً  │ —       │ بيبعت الموجات      │
@@ -252,12 +252,14 @@ graph LR
 
 ### السيناريوهات
 
+> 💡 **ملحوظة عن الأسعار:** الأسعار بالدولار تقريبية — سعر الصرف بيتغير. الأسعار بالجنيه المصري تقديرية وممكن تختلف حسب المكان ووقت الشراء.
+
 | المستوى | هتحتاج إيه | التكلفة | بيعمل إيه |
 |---------|------------|---------|-----------|
 | **مبتدئ** (بدون hardware) | لابتوب بس | $0 | RSSI presence detection بس + تجربة الـ pipeline بالـ simulation |
-| **متوسط** (ESP32 واحد) | ESP32-S3 + راوتر WE | ~280 جنيه | Presence + vital signs + fall detection |
-| **متقدم** (Mesh) | 3-6 ESP32-S3 + راوتر WE | ~850-1700 جنيه | Full pose estimation + multi-person + through-wall |
-| **بحثي** (Research NIC) | Intel 5300 / Atheros | ~1500-3000 جنيه | Full CSI with 3x3 MIMO |
+| **متوسط** (ESP32 واحد) | ESP32-S3 + راوتر WE | ~$9 | Presence + vital signs + fall detection |
+| **متقدم** (Mesh) | 3-6 ESP32-S3 + راوتر WE | ~$27-$54 | Full pose estimation + multi-person + through-wall |
+| **بحثي** (Research NIC) | Intel 5300 / Atheros | ~$50-$100 | Full CSI with 3x3 MIMO |
 
 ### ⚠️ أجهزة مش شغّالة
 
@@ -377,6 +379,7 @@ python v1/data/proof/verify.py
 cd rust-port/wifi-densepose-rs
 cargo test --workspace --no-default-features
 # المفروض: 1,031+ tests passed, 0 failed ✅
+# (ممكن يزيدوا — الـ README بيقول 1,300+ مع كل الـ edge modules)
 
 # أو بالـ Makefile
 make verify           # يتحقق من الـ pipeline
@@ -718,7 +721,7 @@ make install-full     # كل حاجة
 
 make verify           # تحقق من الـ signal processing
 make build-rust       # ابني الـ Rust (release mode)
-make test-rust        # شغّل 1,300+ test
+make test-rust        # شغّل 1,300+ tests
 make run-api          # شغّل Python API (port 8000)
 make run-viz          # شغّل الـ visualization (port 3000)
 make run-docker       # شغّل بالـ Docker Compose
@@ -871,7 +874,7 @@ graph TD
 | Fall detection alert | < 2 seconds |
 | Full pipeline latency | < 100 microseconds/frame |
 | Docker image (Rust) | 132 MB |
-| Tests passing | 1,300+ |
+| Tests passing | 1,300+ (core: 1,031 + edge modules: 609) |
 | ESP32 model size | 55 KB |
 
 ---
